@@ -311,7 +311,9 @@ Program ini digunakan untuk menghitung berat minimum, maksimum, dan rata-rata da
 - Meminta pengguna memasukkan jumlah data balita (n).
 - Memvalidasi bahwa n berada di antara 1 dan 100. Jika tidak, program akan berhenti dengan pesan kesalahan.
 - Input Berat Balita:
-- Hitung Berat Minimum dan Maksimum (Subprogram hitungMinMax):
-- Parameter: array berat balita, jumlah data (n), dan pointer ke variabel min serta max.
-- Parameter: array berat balita dan jumlah data (n).
-- Output Hasil
+
+  ## Referensi
+[1] Knuth, D. E. (1997). The Art of Computer Programming, Volume 3: Sorting and Searching. Addison-Wesley.                                                       
+
+[2] Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). Introduction to Algorithms. MIT Press.
+
