@@ -54,7 +54,7 @@
 
 ## <strong> Dasar Teori </strong>
 
-<strong><h2>Definisi Rekursif</h2></strong>
+<strong><h2>Definisi</h2></strong>
 Pencarian nilai ekstrim adalah algoritma untuk menelusuri dan membandingkan setiap elemen dalam sebuah himpunan data guna menentukan elemen dengan nilai tertinggi (maksimum) atau nilai terendah (minimum).
 
 ### <strong> Prinsip algoritma pencarian nilai ekstrim adalah:
