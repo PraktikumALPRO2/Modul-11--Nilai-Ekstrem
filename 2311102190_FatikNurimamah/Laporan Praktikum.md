@@ -3,8 +3,8 @@
 
 <br> 
 
-<h2 align="center"><strong>MODUL 8</strong></h2>
-<h2 align="center"><strong> PENCARIAN NILAI EKSTRIM PADA HIMPUNAN DATA </strong></h2>
+<h2 align="center"><strong>MODUL 11</strong></h2>
+<h2 align="center"><strong> NILAI EKSTRIM </strong></h2>
 
 <br>
 
