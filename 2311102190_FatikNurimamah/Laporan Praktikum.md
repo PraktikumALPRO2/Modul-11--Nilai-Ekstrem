@@ -4,7 +4,7 @@
 <br> 
 
 <h2 align="center"><strong>MODUL 11</strong></h2>
-<h2 align="center"><strong> NILAI EKSTRIM </strong></h2>
+<h2 align="center"><strong> NILAI EKSTREM </strong></h2>
 
 <br>
 
