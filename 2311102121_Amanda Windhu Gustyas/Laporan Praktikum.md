@@ -43,7 +43,7 @@ Apabila diperhatikan potongan program diatas, maka kita akan memperoleh ipk tert
 ![image](https://github.com/user-attachments/assets/0612778a-1ed6-462e-ac58-7dde4c288bd9)<br/>
 Sehingga melalui algoritma di atas, identitas mahasiswa dapat diperoleh, misalnya T[idx].nama, T[idx].nim, T[idx].kelas, hingga T[idx].jurusan.<br/>
 
-## 2. UNGUIDED
+## II. UNGUIDED
 
 ### 1. Sebuah program digunakan untuk mendata berat anak kelinci yang akan dijual ke pasar. Program ini menggunakan array dengan kapasitas 1000 untuk menampung data berat anak kelinci yang akan dijual. <br/> Masukan terdiri dari sekumpulan bilangan, yang mana bilangan pertama adalah bilangan bulat N yang menyatakan banyaknya anak kelinci yang akan ditimbang beratnya. Selanjutnya N bilangan riil berikutnya adalah berat dari anak kelinci yang akan dijual.<br/> Keluaran terdiri dari dua buah bilangan riil yang menyatakan berat kelinci terkecil dan terbesar.
 
@@ -222,5 +222,7 @@ func main() {
 
 Program di atas mencatat berat balita, lalu menghitung nilai minimum, maksimum, dan rata-rata menggunakan dua fungsi terpisah, kemudian menampilkan hasilnya.
 
-
-
+## KESIMPULAN
+pencarian nilai ekstrim, baik itu nilai maksimum maupun minimum, adalah proses yang umum digunakan dalam berbagai aplikasi, seperti pencarian data pada array atau struktur data lainnya. Pencarian ini dilakukan dengan cara membandingkan setiap elemen data secara berurutan, menyimpan nilai yang dianggap ekstrim, dan terus memvalidasi hingga data terakhir.<br/>
+Pencarian nilai ekstrim bisa dilakukan pada berbagai tipe data, mulai dari data sederhana seperti angka hingga data terstruktur yang lebih kompleks, seperti data mahasiswa. Dalam kasus yang lebih kompleks, pencarian tidak hanya melibatkan nilai ekstrim, tetapi juga informasi terkait, seperti identitas mahasiswa dengan IPK tertinggi.<br/>
+Secara keseluruhan, algoritma pencarian nilai ekstrim ini memberikan cara yang efisien dan sistematis untuk mencari nilai penting dari sebuah kumpulan data, serta dapat dimodifikasi untuk berbagai jenis data sesuai kebutuhan aplikasi yang lebih spesifik.
