@@ -92,7 +92,7 @@ func main() {
 	fmt.Printf("Berat terbesar: %.2f\n", maxWeight)
 }
 ```
-## Output: ![image](https://github.com/user-attachments/assets/1a6b7b7f-4fde-4076-bfad-c1665172af3d)
+## Output:<br/> ![image](https://github.com/user-attachments/assets/1a6b7b7f-4fde-4076-bfad-c1665172af3d)
 
 Program di atas mencari berat kelinci terkecil dan terbesar dari data yang diinput. Setelah jumlah kelinci dan berat masing-masing dimasukkan, program membandingkan tiap berat untuk menentukan nilai minimum dan maksimum, lalu menampilkan hasilnya dalam format dua desimal.
 
@@ -148,7 +148,7 @@ func main() {
 	fmt.Printf("Berat rata-rata ikan di setiap wadah: %.2f\n", avgWeight)
 }
 ```
-## Output: ![image](https://github.com/user-attachments/assets/30572733-e9cb-4185-a631-f07a9a3e5e16)
+## Output:<br/> ![image](https://github.com/user-attachments/assets/30572733-e9cb-4185-a631-f07a9a3e5e16)
 
 Program di atas membagi ikan ke dalam wadah sesuai kapasitas, menghitung total berat ikan di setiap wadah, dan menentukan rata-rata berat per wadah. Data jumlah ikan, kapasitas wadah, dan berat masing-masing ikan diinputkan, lalu program memprosesnya berdasarkan urutan dan menampilkan hasilnya.
 
@@ -218,7 +218,7 @@ func main() {
 	fmt.Printf("Rerata berat balita: %.2f kg\n", rerata)
 }
 ```
-## Output: ![image](https://github.com/user-attachments/assets/d2cdb4d4-7ac0-44f9-8a8f-0a599a7b4e51)
+## Output:<br/> ![image](https://github.com/user-attachments/assets/d2cdb4d4-7ac0-44f9-8a8f-0a599a7b4e51)
 
 Program di atas mencatat berat balita, lalu menghitung nilai minimum, maksimum, dan rata-rata menggunakan dua fungsi terpisah, kemudian menampilkan hasilnya.
 
