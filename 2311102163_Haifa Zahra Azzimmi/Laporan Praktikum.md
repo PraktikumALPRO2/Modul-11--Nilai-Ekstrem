@@ -46,7 +46,67 @@
 2. [Unguided](#unguided)
 
 ## Dasar Teori
+**Pengertian Nilai Ektream**
 
+Nilai ekstrem adalah nilai maksimum atau minimum yang dicapai oleh suatu fungsi atau sekumpulan data, nilai ekstrem dapat berupa:
+
+- Nilai Maksimum: Nilai tertinggi atau terbesar dalam suatu fungsi atau data. Contoh sederhana adalah mencari nilai tertinggi dalam daftar angka.
+- Nilai Minimum: Nilai terendah atau terkecil dalam suatu fungsi atau data. Contohnya adalah mencari nilai terkecil dalam daftar angka.
+
+Dalam konteks pemrograman, algoritma mencari nilai ekstrem sering digunakan untuk mengidentifikasi batas-batas dari suatu himpunan data, seperti mengidentifikasi hari dengan suhu tertinggi dan terendah dalam satu bulan.
+
+Dalam pencarian nilai ekstrem dalam himpunan data, terdapat berbagai metode yang dapat digunakan. Metode ini bisa dilakukan secara manual melalui iterasi atau dengan memanfaatkan fungsi-fungsi bawaan dalam bahasa pemrograman.
+
+- Pencarian Linier: Ini adalah metode paling dasar di mana setiap elemen dalam himpunan data diperiksa satu per satu untuk dibandingkan nilainya. Metode ini memiliki kompleksitas waktu O(n), di mana n adalah jumlah elemen dalam himpunan data.
+- Pencarian dengan Algoritma Khusus: Untuk dataset yang besar, algoritma yang lebih canggih seperti divide and conquer dapat digunakan untuk mengoptimalkan pencarian nilai ekstrem. Algoritma ini bekerja dengan membagi data menjadi bagian-bagian kecil, melakukan pencarian nilai ekstrem pada masing-masing bagian, dan kemudian menggabungkan hasilnya.
+
+**Implementasi Nilai Ektream**
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+// Definisikan fungsi
+func f(x float64) float64 {
+	return x*x - 4*x + 3
+}
+
+func main() {
+	// Parameter iterasi
+	a := 0.0    // Batas bawah
+	b := 5.0    // Batas atas
+	dx := 0.01  // Langkah iterasi
+
+	// Inisialisasi nilai ekstrem
+	xMin, fMin := 0.0, math.Inf(1)  // Minimum awal
+	xMax, fMax := 0.0, math.Inf(-1) // Maksimum awal
+
+	// Iterasi untuk mencari nilai ekstrem
+	for x := a; x <= b; x += dx {
+		fx := f(x) // Hitung nilai fungsi di x
+
+		// Perbarui nilai minimum
+		if fx < fMin {
+			fMin = fx
+			xMin = x
+		}
+
+		// Perbarui nilai maksimum
+		if fx > fMax {
+			fMax = fx
+			xMax = x
+		}
+	}
+
+	// Tampilkan hasil
+	fmt.Printf("Nilai minimum: f(%.2f) = %.2f\n", xMin, fMin)
+	fmt.Printf("Nilai maksimum: f(%.2f) = %.2f\n", xMax, fMax)
+}
+
+```
 ## Unguided 
 
 ### 1. Sebuah program digunakan untuk mendata berat anak kelinci yang akan dijual ke pasar. Program ini menggunakan array dengan kapasitas 1000 untuk menampung data berat anak kelinci yang akan dijual.
