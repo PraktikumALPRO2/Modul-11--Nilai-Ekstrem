@@ -179,6 +179,7 @@ Program ini bertujuan untuk menghitung total berat ikan dalam beberapa wadah dan
 ### 3. Pos Pelayanan Terpadu (posyandu) sebagai tempat pelayanan kesehatan perlu mencatat data berat balita (dalam kg). Petugas akan memasukkan data tersebut ke dalam array. Dari data yang diperoleh akan dicari berat balita terkecil, terbesar, dan reratanya.
 
 Buatlah program dengan spesifikasi subprogram sebagai berikut:
+
 ![image](https://github.com/user-attachments/assets/0846cc49-9d9d-4357-b7e3-7c4707cd9fef)
 ![image](https://github.com/user-attachments/assets/330f9db4-44b9-4a9f-8c01-2ebb6446e477)
 
