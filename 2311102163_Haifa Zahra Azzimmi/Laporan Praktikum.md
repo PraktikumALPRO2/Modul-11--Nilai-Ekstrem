@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/40573bda-1f80-4a7e-b740-23980a173ac6)<h2 align="center"><strong>LAPORAN PRAKTIKUM</strong></h2>
+<h2 align="center"><strong>LAPORAN PRAKTIKUM</strong></h2>
 <h2 align="center"><strong>ALGORITMA DAN PEMROGRAMAN 2</strong></h2>
 
 <br> 
