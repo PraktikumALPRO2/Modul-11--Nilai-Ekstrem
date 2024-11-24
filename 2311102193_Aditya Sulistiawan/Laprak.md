@@ -55,20 +55,48 @@
 ## <strong> Dasar Teori </strong>
 
 <strong><h2>Definisi</h2></strong>
-Nilai ekstrem dari fungsi f(x) adalah nilai y = f(x) yang diperoleh untuk input tertentu x, sehingga tidak ada nilai f(x) lain dalam jangkauan tersebut yang lebih tinggi atau lebih rendah dari nilai-nilai ini. Ada dua jenis nilai ekstrem: maksimum dan minimum. Nilai maksimum dari fungsi adalah nilai yang tidak dapat dilampaui oleh nilai fungsi lainnya, sedangkan nilai minimum dari fungsi adalah nilai yang tidak dapat diturunkan oleh nilai fungsi lainnya.
+Dalam pemrograman, nilai ekstrem merujuk pada nilai terkecil (minimum) dan terbesar (maksimum) dalam sebuah kumpulan data. Dalam konteks bahasa Go (Golang), nilai ekstrem sering dicari menggunakan struktur data seperti array atau slice, dan prosesnya melibatkan iterasi untuk membandingkan elemen satu per satu.
 
-### <strong> Prinsip algoritma pencarian nilai ekstrim adalah:
-- Memulai dengan menetapkan elemen pertama sebagai nilai awal (sementara) untuk nilai maksimum atau minimum.
-- Membandingkan setiap elemen berikutnya dengan nilai sementara.
-- Memperbarui nilai maksimum atau minimum jika ditemukan elemen dengan nilai lebih tinggi (untuk maksimum) atau lebih rendah (untuk minimum).
+### <strong> Cara Mencari Nilai Ekstrem di Go:
+1. Inisialisasi Nilai Awal:
+	Untuk mencari nilai minimum, inisialisasi dengan nilai maksimum (math.MaxFloat64 untuk float64 atau math.MaxInt untuk integer).
+	Untuk mencari nilai maksimum, inisialisasi dengan nilai minimum (-math.MaxFloat64 atau math.MinInt).
+
+2. Iterasi Data:
+	Bandingkan setiap elemen dalam array/slice dengan nilai saat ini.
+	Perbarui nilai minimum/maksimum jika elemen saat ini lebih kecil/besar dari nilai yang sudah tersimpan.
+
+3. Efisiensi: Pendekatan ini memiliki kompleksitas waktu O(n), karena setiap elemen diperiksa satu kali.
   
 ### <strong> Implementasi:
-Dalam pemrograman, pencarian nilai ekstrim sering kali menjadi dasar untuk membangun algoritma yang lebih kompleks, seperti sorting, optimasi, atau analisis data. Algoritma ini diimplementasikan menggunakan perulangan (loop) untuk memindai elemen-elemen dalam struktur data.
+```go
+package main
 
-**Penggunaan:**
-- Menemukan nilai tertinggi dalam data skor ujian.
-- Menentukan suhu maksimum/minimum dari data cuaca.
-- Mengidentifikasi harga saham tertinggi atau terendah dalam periode tertentu.
+import (
+	"fmt"
+	"math"
+)
+
+func cariMinMax(data []float64) (float64, float64) {
+	min := math.MaxFloat64
+	max := -math.MaxFloat64
+	for _, val := range data {
+		if val < min {
+			min = val
+		}
+		if val > max {
+			max = val
+		}
+	}
+	return min, max
+}
+
+func main() {
+	data := []float64{2.5, 3.1, 7.4, 1.2, 4.6}
+	min, max := cariMinMax(data)
+	fmt.Printf("Nilai minimum: %.2f, Nilai maksimum: %.2f\n", min, max)
+}
+```
 
 # <strong> Unguided </strong>
 ## Unguided - 1
@@ -83,66 +111,85 @@ _Keluaran terdiri dari dua buah bilangan riil yang menyatakan berat kelinci terk
 
 ### Source Code
 ```go
-//Rangga Pradarrell Fathi
-//2311102200
-//IF-11-05
+//Aditya Sulistiawan
+//2311102193
 
 package main
 
 import (
 	"fmt"
+	"math"
 )
 
+// Fungsi untuk mendapatkan berat kelinci dari pengguna
+func ambilBeratKelinci(jumlah int) []float64 {
+	berat := make([]float64, jumlah)
+	fmt.Println("Masukkan berat kelinci:")
+	for i := 0; i < jumlah; i++ {
+		fmt.Printf("Berat kelinci ke-%d: ", i+1)
+		fmt.Scan(&berat[i])
+	}
+	return berat
+}
+
+// Fungsi untuk mencari berat terkecil dan terbesar
+func cariMinMax(berat []float64) (float64, float64) {
+	beratTerkecil := math.MaxFloat64
+	beratTerbesar := -math.MaxFloat64
+
+	for _, b := range berat {
+		if b < beratTerkecil {
+			beratTerkecil = b
+		}
+		if b > beratTerbesar {
+			beratTerbesar = b
+		}
+	}
+
+	return beratTerkecil, beratTerbesar
+}
+
 func main() {
-
-	var n int
+	// Input jumlah anak kelinci
+	var jumlahKelinci int
 	fmt.Print("Masukkan jumlah anak kelinci (N): ")
-	fmt.Scan(&n)
+	fmt.Scan(&jumlahKelinci)
 
-	if n <= 0 || n > 1000 {
+	// Validasi jumlah anak kelinci
+	if jumlahKelinci <= 0 || jumlahKelinci > 1000 {
 		fmt.Println("Jumlah anak kelinci harus antara 1 dan 1000.")
 		return
 	}
 
-	weights := make([]float64, n)
+	// Ambil berat kelinci dan hitung berat terkecil dan terbesar
+	berat := ambilBeratKelinci(jumlahKelinci)
+	beratTerkecil, beratTerbesar := cariMinMax(berat)
 
-	fmt.Println("Masukkan berat kelinci:")
-	for i := 0; i < n; i++ {
-		fmt.Scan(&weights[i])
-	}
-
-	minWeight := weights[0]
-	maxWeight := weights[0]
-
-	for _, weight := range weights {
-		if weight < minWeight {
-			minWeight = weight
-		}
-		if weight > maxWeight {
-			maxWeight = weight
-		}
-	}
-
-	fmt.Printf("Berat terkecil: %.2f\n", minWeight)
-	fmt.Printf("Berat terbesar: %.2f\n", maxWeight)
+	// Tampilkan hasil
+	fmt.Printf("Berat terkecil: %.2f\n", beratTerkecil)
+	fmt.Printf("Berat terbesar: %.2f\n", beratTerbesar)
 }
-
 ```
 
+### Screenshoot Source Code
+![carbon](https://github.com/user-attachments/assets/ed9dbd6c-73bc-487f-bf10-097c887e0291)
+
+
 ### Screenshot Output
-![image](https://github.com/user-attachments/assets/0934bcfa-5728-4594-ab02-ff9c9dc17977)
+![Gui](https://github.com/user-attachments/assets/0c04cc62-ca3b-4c27-8995-744447fa3f28)
+
 
 ### Deskripsi Program
-Program ini dirancang untuk mencari berat terkecil dan terbesar dari sejumlah anak kelinci berdasarkan input dari pengguna. Pengguna diminta untuk memasukkan jumlah anak kelinci serta berat masing-masing anak kelinci.
+Program ini digunakan untuk menentukan berat terkecil dan terbesar dari sejumlah anak kelinci. Pengguna memasukkan jumlah anak kelinci dan berat masing-masing kelinci, kemudian program menghitung berat terkecil dan terbesar dari data yang diberikan.
 
-Algoritma Program
--Masukkan Jumlah Anak Kelinci (n):
-- Inisialisasi Slice weights:
-- Masukkan Berat Masing-Masing Anak Kelinci:
-- Inisialisasi Berat Terkecil dan Terbesar:
-- Pencarian Berat Terkecil dan Terbesar:
-- Iterasi melalui seluruh elemen slice weights:
-- Output Hasil
+### Algoritma Program
+1. Input Jumlah Kelinci: Minta pengguna memasukkan jumlah anak kelinci (N).
+2. Validasi Input: Periksa apakah N berada dalam rentang 1 hingga 1000.
+3. Input Berat Kelinci: Minta pengguna memasukkan berat tiap kelinci.
+4. Cari Berat Terkecil dan Terbesar
+5. Output Hasil: Tampilkan berat terkecil dan terbesar ke layar.
+
+Cara kerja program nya adalah dimulai dengan meminta pengguna untuk memasukkan jumlah kelinci yang akan diproses. Apabila jumlah yang dimasukkan tidak valid (kurang dari 1 atau lebih dari 1000), program akan menunjukkan pesan kesalahan dan menghentikan prosesnya. Setelah jumlah yang valid telah diberikan, pengguna akan diminta untuk memasukkan berat setiap kelinci satu per satu. Program kemudian mengolah data tersebut untuk menentukan berat paling ringan dan paling berat dengan membandingkan semua berat yang diinputkan. Terakhir, program menampilkan hasil berupa berat paling ringan dan paling berat di layar sebagai output.
 
   ## Unguided - 2
 ### Study Case
@@ -156,9 +203,9 @@ _Keluaran terdiri dari dua baris. Baris pertama adalah kumpulan bilangan niil ya
 
 ### Source Code
 ```go
-//Rangga Pradarrell Fathi
-//2311102200
-//IF-11-05
+//Aditya Sulistiawan
+//2311102193
+
 package main
 
 import (
@@ -212,108 +259,124 @@ func main() {
 }
 
 ```
+### Screenshoot Source Code
+![carbon](https://github.com/user-attachments/assets/1ff84dfc-0778-4949-abad-5365f68d6578)
+
+
 
 ### Screenshot Output
-![image](https://github.com/user-attachments/assets/1ed7a619-61c4-4ecc-af06-50e291a00da8)
+![1](https://github.com/user-attachments/assets/487bb98f-9e26-4aa8-8ef0-a82b0bcc8bcc)
+
 
 ### Deskripsi Program
-Program ini dirancang untuk menghitung total berat ikan dalam wadah dan rata-rata berat ikan per wadah berdasarkan jumlah ikan, kapasitas wadah, dan berat masing-masing ikan yang diinputkan pengguna. 
+Program ini menghitung jumlah total berat ikan di setiap wadah dan rata-rata berat per wadah. Pengguna memasukkan jumlah ikan, kapasitas wadah, dan berat dari masing-masing ikan. Program selanjutnya akan membagi ikan ke dalam wadah sesuai dengan kapasitas yang telah ditentukan, menghitung total berat di setiap wadah, serta menampilkan rata-rata berat dari seluruh wadah.
 
 **Algoritma Program**
-- Input Jumlah Ikan (x) dan Kapasitas Wadah (y).
-- Input Berat Ikan.
-- Pengelompokan Berat Ikan ke Dalam Wadah.
-- Menghitung Rata-rata Berat per Wadah.
-- Output Hasil.
+1. Input Jumlah Ikan dan Kapasitas Wadah**: Minta pengguna memasukkan jumlah ikan (`x`) dan kapasitas setiap wadah (`y`).
+2. Validasi Input**: Periksa apakah jumlah ikan valid (1 ≤ x ≤ 1000) dan kapasitas wadah lebih dari 0.
+3. Input Berat Ikan**: Simpan berat masing-masing ikan ke dalam array.
+4. Hitung Total Berat Per Wadah**:
+   - Tambahkan berat ikan secara berurutan.
+   - Saat jumlah ikan mencapai kapasitas wadah (`y`), simpan total berat ke daftar total wadah dan ulangi proses untuk ikan berikutnya.
+5. Hitung Rata-rata Berat Wadah**: Jumlahkan semua berat dalam daftar total wadah dan bagi dengan jumlah wadah.
+6. Tampilkan Hasil**: Cetak total berat ikan per wadah dan rata-rata berat wadah.
 
-  ## Unguided - 2
+cara kerja program nya yaitu program ini nantinya meminta jumlah ikan dan kapasitas wadah, lalu memvalidasi inputnya. Pengguna memasukkan berat tiap ikan, yang kemudian dikelompokkan ke dalam wadah sesuai kapasitas. Program menghitung total berat tiap wadah dan rata-rata berat semua wadah, lalu menampilkan hasilnya gitu deh kak.	
+
+  ## Unguided - 3
 ### Study Case
 **3. Pos Pelayanan Terpadu (posyandu) sebagai tempat pelayanan kesehatan perlu mencatat data berat balita (dalam kg). Petugas akan memasukkan data tersebut ke dalam array. Dari data yang diperoleh akan dicari berat balita terkecil, terbesar, dan reratanya.**
 
 
 ### Source Code
 ```go
-// Rangga Pradarrell Fathi
-// 2311102200
-// IF-11-05
+///Aditya Sulistiawan
+///2311102193
+
 package main
 
 import (
 	"fmt"
 )
 
-// Definisi tipe array untuk berat balita
-type arrBalita [100]float64
+// Definisi tipe array untuk menyimpan data berat anak
+type dataBeratAnak [100]float64
 
-// Subprogram untuk menghitung berat minimum dan maksimum
-func hitungMinMax(arrBerat arrBalita, n int, min, max *float64) {
-	*min = arrBerat[0]
-	*max = arrBerat[0]
-	for i := 1; i < n; i++ {
-		if arrBerat[i] < *min {
-			*min = arrBerat[i]
+// Fungsi untuk menentukan berat minimum dan maksimum
+func cariMinMax(beratAnak dataBeratAnak, jumlah int, beratMin, beratMax *float64) {
+	*beratMin = beratAnak[0]
+	*beratMax = beratAnak[0]
+	for idx := 1; idx < jumlah; idx++ {
+		if beratAnak[idx] < *beratMin {
+			*beratMin = beratAnak[idx]
 		}
-		if arrBerat[i] > *max {
-			*max = arrBerat[i]
+		if beratAnak[idx] > *beratMax {
+			*beratMax = beratAnak[idx]
 		}
 	}
 }
 
-// Subprogram untuk menghitung rata-rata berat balita
-func rataRata(arrBerat arrBalita, n int) float64 {
-	total := 0.0
-	for i := 0; i < n; i++ {
-		total += arrBerat[i]
+// Fungsi untuk menghitung nilai rata-rata berat
+func hitungRataRata(beratAnak dataBeratAnak, jumlah int) float64 {
+	totalBerat := 0.0
+	for idx := 0; idx < jumlah; idx++ {
+		totalBerat += beratAnak[idx]
 	}
-	return total / float64(n)
+	return totalBerat / float64(jumlah)
 }
 
 func main() {
-	var n int
-	var berat arrBalita
-	var min, max float64
+	var jumlahAnak int
+	var berat dataBeratAnak
+	var beratMin, beratMax float64
 
-	// Input jumlah data balita
-	fmt.Print("Masukkan banyak data berat balita: ")
-	fmt.Scan(&n)
+	// Input jumlah anak
+	fmt.Print("Masukkan jumlah data berat anak: ")
+	fmt.Scan(&jumlahAnak)
 
 	// Validasi jumlah data
-	if n <= 0 || n > 100 {
-		fmt.Println("Jumlah data balita harus antara 1 dan 100.")
+	if jumlahAnak <= 0 || jumlahAnak > 100 {
+		fmt.Println("Jumlah data berat anak harus antara 1 dan 100.")
 		return
 	}
 
-	// Input berat balita
-	for i := 0; i < n; i++ {
-		fmt.Printf("Masukkan berat balita ke-%d: ", i+1)
+	// Input data berat masing-masing anak
+	for i := 0; i < jumlahAnak; i++ {
+		fmt.Printf("Masukkan berat anak ke-%d: ", i+1)
 		fmt.Scan(&berat[i])
 	}
 
-	// Hitung nilai minimum, maksimum, dan rata-rata
-	hitungMinMax(berat, n, &min, &max)
-	rata := rataRata(berat, n)
+	// Hitung berat minimum, maksimum, dan rata-rata
+	cariMinMax(berat, jumlahAnak, &beratMin, &beratMax)
+	rataRata := hitungRataRata(berat, jumlahAnak)
 
-	// Output hasil
-	fmt.Printf("Berat balita minimum: %.2f kg\n", min)
-	fmt.Printf("Berat balita maksimum: %.2f kg\n", max)
-	fmt.Printf("Rata-rata berat balita: %.2f kg\n", rata)
+	// Output hasil perhitungan
+	fmt.Printf("Berat anak minimum: %.2f kg\n", beratMin)
+	fmt.Printf("Berat anak maksimum: %.2f kg\n", beratMax)
+	fmt.Printf("Rata-rata berat anak: %.2f kg\n", rataRata)
 }
-
 ```
+### Screenshoot Source Code
+![carbon](https://github.com/user-attachments/assets/e705cf04-3e2c-4bd3-842b-1af491e03b6e)
+
 
 ### Screenshot Output
-![image](https://github.com/user-attachments/assets/8a6da666-03d3-43d9-b869-8a279772dcb7)
+![gui](https://github.com/user-attachments/assets/1c6dc5ea-efa3-4791-929e-a984bc757d60)
+
 
 ### Deskripsi Program
-Program ini digunakan untuk menghitung berat minimum, maksimum, dan rata-rata dari sejumlah data berat balita yang dimasukkan oleh pengguna. Program ini memanfaatkan array statis (arrBalita) untuk menyimpan data berat balita dan beberapa subprogram untuk menghitung nilai-nilai yang diperlukan.
+Program ini digunakan untuk menghitung berat minimum, maksimum, dan rata-rata dari sejumlah data berat anak yang dimasukkan oleh pengguna.
 
 **Algoritma Program**
-- Meminta pengguna memasukkan jumlah data balita (n).
-- Memvalidasi bahwa n berada di antara 1 dan 100. Jika tidak, program akan berhenti dengan pesan kesalahan.
-- Input Berat Balita:
+1. Input jumlah anak dan validasi bahwa nilainya berada dalam rentang 1–100.
+2. Input berat masing-masing anak.
+3. Cari berat terkecil dan terbesar dengan membandingkan setiap berat yang dimasukkan.
+4. Hitung rata-rata berat dengan menjumlahkan semua berat lalu membagi dengan jumlah anak.
+5. Tampilkan berat minimum, maksimum, dan rata-rata.
+
+cara kerja program : Program dimulai dengan meminta jumlah data berat anak dan memvalidasi apakah jumlahnya berada dalam rentang yang diperbolehkan. Setelah itu, pengguna memasukkan berat masing-masing anak satu per satu. Program menghitung berat minimum dan maksimum dengan membandingkan semua data berat, kemudian menghitung rata-rata berat anak. Hasil berupa berat minimum, maksimum, dan rata-rata ditampilkan ke layar.
 
   ## Referensi
-[1] Knuth, D. E. (1997). The Art of Computer Programming, Volume 3: Sorting and Searching. Addison-Wesley.                                                       
+[1] The GO Programming Language specification - The GO Programming language. (n.d.).
 
-[2] Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). Introduction to Algorithms. MIT Press.
-
+[2] Documentation - The Go Programming Language. (n.d.).
