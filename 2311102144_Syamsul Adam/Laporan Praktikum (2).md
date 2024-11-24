@@ -1,12 +1,12 @@
 # <h2 align="center">LAPORAN PRAKTIKUM</h2>
 # <h2 align="center">ALGORITMA DAN PEMROGRAMAN 2</h2>
-# <h2 align="center">MODUL 8</h2>
+# <h2 align="center">MODUL 11</h2>
 # <h2 align="center">PENCARIAN NILAI EKSTRIM PADA HIMPUNAN DATA</h2>
 <p align="center">
     <img src="https://github.com/user-attachments/assets/3ccfed0b-72d1-4349-ac08-c4dce379c827" alt="Gambar">
 </p>
  <h3  align="center" >Disusun Oleh : </h3>
-<p align="center">Amanda Windhu Gustyas - 2311102121</p>
+<p align="center">Syamsul Adam - 2311102144</p>
 <p align="center">IF-11-05</p>
  <h3 <p align="center" >Dosen Pengampu : </h3> </p>
  <p align="center">Arif Amrulloh, S.Kom., M.Kom.</p>
@@ -50,51 +50,39 @@ Sehingga melalui algoritma di atas, identitas mahasiswa dapat diperoleh, misalny
 ```go
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
+	// Input
 	var n int
 	fmt.Print("Masukkan jumlah kelinci: ")
-	fmt.Scan(&n)
-
-	// Validasi input
-	if n <= 0 {
-		fmt.Println("Jumlah kelinci harus lebih dari 0.")
-		return
-	}
-
+	fmt.Scanln(&n)
 	weights := make([]float64, n)
-	fmt.Printf("Masukkan berat masing-masing kelinci (%d angka):\n", n)
-
-	// Input data berat kelinci
 	for i := 0; i < n; i++ {
-		fmt.Scan(&weights[i])
+		fmt.Scanln(&weights[i])
 	}
 
-	// Inisialisasi nilai minimum dan maksimum
+	// Mencari berat kelinci terkecil dan terbesar
 	minWeight := weights[0]
 	maxWeight := weights[0]
-
-	// Cari berat terkecil dan terbesar
-	for _, weight := range weights {
-		if weight < minWeight {
-			minWeight = weight
+	for i := 1; i < n; i++ {
+		if weights[i] < minWeight {
+			minWeight = weights[i]
 		}
-		if weight > maxWeight {
-			maxWeight = weight
+		if weights[i] > maxWeight {
+			maxWeight = weights[i]
 		}
 	}
 
-	// Tampilkan hasil
-	fmt.Printf("Berat terkecil: %.2f\n", minWeight)
-	fmt.Printf("Berat terbesar: %.2f\n", maxWeight)
+	// Output
+	fmt.Println("Berat kelinci terkecil:", minWeight)
+	fmt.Println("Berat kelinci terbesar:", maxWeight)
 }
 ```
-## Output:<br/> ![image](https://github.com/user-attachments/assets/1a6b7b7f-4fde-4076-bfad-c1665172af3d)
+## Output:![Screenshot 2024-11-24 224245](https://github.com/user-attachments/assets/fccc20d3-d5c9-4b7c-98fb-9bc1f1404548)
 
-Program di atas mencari berat kelinci terkecil dan terbesar dari data yang diinput. Setelah jumlah kelinci dan berat masing-masing dimasukkan, program membandingkan tiap berat untuk menentukan nilai minimum dan maksimum, lalu menampilkan hasilnya dalam format dua desimal.
+
+Program di atas untuk menghitung dan menampilkan berat terkecil dan terbesar dari sekumpulan data berat kelinci.  Setelah jumlah kelinci dan berat masing-masing dimasukkan, program membandingkan tiap berat untuk menentukan nilai minimum dan maksimum, lalu menampilkan hasilnya 
 
 ### 2. Sebuah program digunakan untuk menentukan tarif ikan yang akan dijual ke pasar. Program ini menggunakan array dengan kapasitas 1000 untuk menampung data berat ikan yang akan dijual. <br/> Masukan terdiri dari dua baris, yang mana baris pertama terdiri dari dua bilangan bulat x dan y. Bilangan x menyatakan banyaknya ikan yang akan dijual, sedangkan y adalah banyaknya ikan yang akan dimasukkan ke dalam wadah. Baris kedua terdiri dari sejumlah x bilangan riil yang menyatakan banyaknya ikan yang akan dijual.<br/> Keluaran terdiri dari dua baris. Baris pertama adalah kumpulan bilangan riil yang menyatakan total berat ikan di setiap wadah (jumlah wadah tergantung pada nilai x dan y, urutan ikan yang dimasukkan ke dalam wadah sesuai urutan pada masukan baris ke-2). Baris kedua adalah sebuah bilangan riil yang menyatakan berat rata-rata ikan di setiap wadah.
 
@@ -103,54 +91,53 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 func main() {
+	// Input
+
 	var x, y int
 	fmt.Print("Masukkan jumlah ikan (x) dan kapasitas wadah (y): ")
 	fmt.Scan(&x, &y)
 
-	// Validasi input
-	if x <= 0 || y <= 0 {
-		fmt.Println("Jumlah ikan dan kapasitas wadah harus lebih dari 0.")
-		return
-	}
-
-	weights := make([]float64, x)
-	fmt.Printf("Masukkan berat %d ikan:\n", x)
-
-	// Input berat ikan
+	var beratIkan []float64
+	fmt.Println("Masukkan berat ikan (x bilangan riil):")
 	for i := 0; i < x; i++ {
-		fmt.Scan(&weights[i])
+		var berat float64
+		fmt.Scanln(&berat)
+		beratIkan = append(beratIkan, berat)
 	}
 
-	// Proses pembagian ikan ke dalam wadah
-	totalWadah := int(math.Ceil(float64(x) / float64(y)))
-	wadah := make([]float64, totalWadah)
-	avgWeight := 0.0
-
+	// Hitung total berat ikan di setiap wadah
+	totalBerat := make([]float64, y)
 	for i := 0; i < x; i++ {
-		wadah[i/y] += weights[i]
-		avgWeight += weights[i]
+		fmt.Printf("Berat ikan ke-%d: ", i+1)
+		fmt.Scan(&beratIkan[i])
+		
+
+		totalBerat[i%y] += beratIkan[i]
 	}
 
-	// Hitung rata-rata
-	avgWeight /= float64(totalWadah)
+	// Hitung berat rata-rata ikan di setiap wadah
+	rataRataBerat := 0.0
+	for i := 0; i < y; i++ {
+		rataRataBerat += totalBerat[i]
+	}
+	rataRataBerat /= float64(y)
 
-	// Output hasil
-	fmt.Println("Berat total di setiap wadah:")
-	for i := 0; i < totalWadah; i++ {
-		fmt.Printf("%.2f ", wadah[i])
+	// Output: Dua baris, baris pertama berisi total berat, baris kedua berisi rata-rata
+	fmt.Println("Total berat ikan di setiap wadah:")
+	for i := 0; i < y; i++ {
+		fmt.Printf("%.2f ", totalBerat[i])
 	}
 	fmt.Println()
-
-	fmt.Printf("Berat rata-rata ikan di setiap wadah: %.2f\n", avgWeight)
+	fmt.Printf("Berat rata-rata ikan di setiap wadah: %.2f\n", rataRataBerat)
 }
-```
-## Output:<br/> ![image](https://github.com/user-attachments/assets/30572733-e9cb-4185-a631-f07a9a3e5e16)
 
-Program di atas membagi ikan ke dalam wadah sesuai kapasitas, menghitung total berat ikan di setiap wadah, dan menentukan rata-rata berat per wadah. Data jumlah ikan, kapasitas wadah, dan berat masing-masing ikan diinputkan, lalu program memprosesnya berdasarkan urutan dan menampilkan hasilnya.
+```
+## Output:![Screenshot 2024-11-24 213248](https://github.com/user-attachments/assets/e89fed4c-5656-4ef0-9ac3-ba71e8a54010)
+
+Program ini berguna untuk menghitung berat ikan ke dalam beberapa wadah berdasarkan kapasitas yang ditentukan. Program ini dapat digunakan dalam konteks perikananterkait distribusi berat ikan dalam wadah. Program ini berguna tentang total dan rata-rata berat ikan di setiap wadah.
 
 ### 3. Pos Pelayanan Terpadu (posyandu) sebagai tempat pelayanan kesehatan perlu mencatat data berat balita (dalam kg). Petugas akan memasukkan data tersebut ke dalam array. Dari data yang diperoleh akan dicari berat balita terkecil, terbesar, dan rataratanya.<br/> Buatlah program dengan spesifikasi subprogram sebagai berikut:<br/>
 ![image](https://github.com/user-attachments/assets/5519ae3c-963f-4e37-a129-e1d32f90879f)<br/>
@@ -162,67 +149,55 @@ Copy code
 ```go
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 type arrBalita [100]float64
 
 func hitungMinMax(arrBerat arrBalita, n int, bMin, bMax *float64) {
-	*bMin, *bMax = arrBerat[0], arrBerat[0]
-	for i := 1; i < n; i++ {
-		if arrBerat[i] < *bMin {
-			*bMin = arrBerat[i]
-		}
-		if arrBerat[i] > *bMax {
-			*bMax = arrBerat[i]
-		}
-	}
+    *bMin = arrBerat[0]
+    *bMax = arrBerat[0]
+    for i := 1; i < n; i++ { // Hanya iterasi hingga n
+        if arrBerat[i] < *bMin {
+            *bMin = arrBerat[i]
+        }
+        if arrBerat[i] > *bMax {
+            *bMax = arrBerat[i]
+        }
+    }
 }
 
-func hitungRerata(arrBerat arrBalita, n int) float64 {
-	var total float64 = 0
-	for i := 0; i < n; i++ {
-		total += arrBerat[i]
-	}
-	return total / float64(n)
+func rerata(arrBerat arrBalita, n int) float64 {
+    var sum float64
+    for i := 0; i < n; i++ { // Hanya iterasi hingga n
+        sum += arrBerat[i]
+    }
+    return sum / float64(n)
 }
 
 func main() {
-	var n int
-	var arrBerat arrBalita
-	var bMin, bMax float64
+    var n int
+    fmt.Print("Masukan banyak data berat balita: ")
+    fmt.Scanln(&n)
+    var arrBalita arrBalita
+    for i := 0; i < n; i++ {
+        fmt.Printf("Masukan berat balita ke-%d: ", i+1)
+        fmt.Scanln(&arrBalita[i])
+    }
 
-	fmt.Print("Masukkan banyak data berat balita: ")
-	fmt.Scan(&n)
-
-	// Validasi input
-	if n <= 0 || n > 100 {
-		fmt.Println("Jumlah data harus antara 1 hingga 100.")
-		return
-	}
-
-	// Input data berat balita
-	for i := 0; i < n; i++ {
-		fmt.Printf("Masukkan berat balita ke-%d: ", i+1)
-		fmt.Scan(&arrBerat[i])
-	}
-
-	// Hitung nilai minimum, maksimum, dan rata-rata
-	hitungMinMax(arrBerat, n, &bMin, &bMax)
-	rerata := hitungRerata(arrBerat, n)
-
-	// Output hasil
-	fmt.Printf("Berat balita minimum: %.2f kg\n", bMin)
-	fmt.Printf("Berat balita maksimum: %.2f kg\n", bMax)
-	fmt.Printf("Rerata berat balita: %.2f kg\n", rerata)
+    var bMin, bMax float64
+    hitungMinMax(arrBalita, n, &bMin, &bMax) // Pass n ke fungsi
+    fmt.Printf("Berat balita minimum: %.2f kg\n", bMin)
+    fmt.Printf("Berat balita maksimum: %.2f kg\n", bMax)
+    fmt.Printf("Rerata berat balita: %.2f kg\n", rerata(arrBalita, n)) // Pass n ke fungsi
 }
-```
-## Output:<br/> ![image](https://github.com/user-attachments/assets/d2cdb4d4-7ac0-44f9-8a8f-0a599a7b4e51)
 
-Program di atas mencatat berat balita, lalu menghitung nilai minimum, maksimum, dan rata-rata menggunakan dua fungsi terpisah, kemudian menampilkan hasilnya.
+```
+## Output:![Screenshot 2024-11-24 223738](https://github.com/user-attachments/assets/502093ee-774c-42e8-8c21-715f1026c899)
+
+
+Program ini efektif dalam menghitung dan menampilkan berat minimum, maksimum, dan rata-rata dari data berat balita. Program ini dapat digunakan dalam berbagai konteks. Dengan menggunakan fungsi terpisah untuk perhitungan, program ini juga menunjukkan struktur yang baik dan memudahkan pemeliharaan serta pengembangan lebih lanjut.
 
 ## KESIMPULAN
-pencarian nilai ekstrim, baik itu nilai maksimum maupun minimum, adalah proses yang umum digunakan dalam berbagai aplikasi, seperti pencarian data pada array atau struktur data lainnya. Pencarian ini dilakukan dengan cara membandingkan setiap elemen data secara berurutan, menyimpan nilai yang dianggap ekstrim, dan terus memvalidasi hingga data terakhir.<br/>
-Pencarian nilai ekstrim bisa dilakukan pada berbagai tipe data, mulai dari data sederhana seperti angka hingga data terstruktur yang lebih kompleks, seperti data mahasiswa. Dalam kasus yang lebih kompleks, pencarian tidak hanya melibatkan nilai ekstrim, tetapi juga informasi terkait, seperti identitas mahasiswa dengan IPK tertinggi.<br/>
-Secara keseluruhan, algoritma pencarian nilai ekstrim ini memberikan cara yang efisien dan sistematis untuk mencari nilai penting dari sebuah kumpulan data, serta dapat dimodifikasi untuk berbagai jenis data sesuai kebutuhan aplikasi yang lebih spesifik.
+Secara keseluruhan, ketiga program ini menunjukkan kemampuan untuk mengolah data dengan cara yang terstruktur. Masing-masing program memiliki fokus yang berbeda, tetapi semuanya memberikan hasil yang bermanfaat berdasarkan input pengguna. Penggunaan array dan fungsi dalam program-program ini juga mencerminkan praktik pemrograman yang baik, yang dapat memudahkan pengembangan dan pemeliharaan. Program-program ini dapat diterapkan dalam berbagai konteks, termasuk peternakan, perikanan, dan kesehatan,
+## Daftar Pustaka
+Modul 11 Praktikum algoritma pemograman.
