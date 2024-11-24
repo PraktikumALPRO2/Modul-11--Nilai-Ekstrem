@@ -1,0 +1,48 @@
+package main
+import "fmt"
+
+type kelinci [1000]float64
+
+func isiarray(a *kelinci, n int, data float64){
+	for i := 0; i<n; i++{
+		fmt.Print("Masukkan data berat kelinci ke-", i + 1, " :")
+		fmt.Scan(&data)
+		a[i] = data
+	}
+}
+
+func nilai_terkecil(a kelinci, n int) float64{
+	var terkecil float64
+	terkecil = a[0]
+	i:=0
+	for i<n{
+		if terkecil > a[i]{
+			terkecil = a[i]
+		}
+		i = i+1
+	}
+	return terkecil
+}
+
+func nilai_terbesar(a kelinci, n int) float64{
+	var terbesar float64
+	terbesar = a[0]
+	i :=1
+	for i<n{
+		if terbesar < a[i]{
+			terbesar = a[i]
+		}
+		i = i+1
+	}
+	return terbesar
+}
+
+func main(){
+	var berat kelinci
+	var n int
+	var data float64
+	fmt.Print("Masukkan Banyak Kelinci: ")
+	fmt.Scan(&n)
+	isiarray(&berat, n, data)
+	fmt.Print("Berat kelinci terkecil pada penimbangan kali ini adalah ", nilai_terkecil(berat, n), " sedangkan kelinci terberat pada penimbangan adalah ",  nilai_terbesar(berat, n))
+}
