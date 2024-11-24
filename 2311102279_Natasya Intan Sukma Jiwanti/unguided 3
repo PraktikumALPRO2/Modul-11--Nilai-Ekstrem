@@ -1,0 +1,58 @@
+package main
+import "fmt"
+
+type balita [100]float64
+
+func isidata(data *balita, n int) {
+	for i := 0; i < n; i++ {
+		fmt.Print("Masukkan data berat balita ke-", i+1, " : ")
+		fmt.Scan(&(*data)[i])
+	}
+}
+
+func hitungminmax(data balita, n int) (float64, float64) {
+	var min, max float64
+	min = data[0]
+	max = data[0]
+
+	for i := 1; i < n; i++ {
+		if min > data[i] {
+			min = data[i]
+		}
+		if max < data[i] {
+			max = data[i]
+		}
+	}
+	return min, max
+}
+
+func rerata(data balita, n int) float64 {
+	var jumlah, rata float64
+	for i := 0; i < n; i++ {
+		jumlah += data[i]
+	}
+	rata = jumlah / float64(n)
+	return rata
+}
+
+func main() {
+	var berat balita
+	var n int
+
+	fmt.Print("Masukkan Banyak Balita: ")
+	fmt.Scan(&n)
+
+	if n <= 0 || n > 100 {
+		fmt.Println("Jumlah Balita tidak sesuai dengan kapasitas penyimpanan!")
+		return
+	}
+
+	isidata(&berat, n)
+
+	min, max := hitungminmax(berat, n)
+	rata := rerata(berat, n)
+
+	fmt.Printf("Berat terkecil: %.2f\n", min)
+	fmt.Printf("Berat terbesar: %.2f\n", max)
+	fmt.Printf("Rata-rata berat: %.2f\n", rata)
+}
