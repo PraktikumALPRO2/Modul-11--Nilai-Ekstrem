@@ -11,41 +11,55 @@ func dataikan(b *ikan, n int) {
 }
 
 func banyakwadah(n int, y int) (int, int) {
-	var banyakwadah, wadahterakhir, totalwadah int
-	banyakwadah = n / y
-	wadahterakhir = n % y
-	if wadahterakhir == 0 {
-		totalwadah = banyakwadah
-	} else {
-		totalwadah = banyakwadah + 1
+	if y <= 0 {
+		return 0, n 
+	}
+	banyakwadah := n / y
+	wadahterakhir := n % y
+	totalwadah := banyakwadah
+	if wadahterakhir > 0 {
+		totalwadah++
 	}
 	return totalwadah, wadahterakhir
 }
 
-func rataRataPerWadah(b *ikan, n int, y int) (float64, int) {
+func totalBeratDanJumlahIkanPerWadah(b *ikan, n int, y int) ([]float64, []int) {
 	totalWadah, _ := banyakwadah(n, y)
-	var totalRata, rataseluruhnya, totalBerat  float64
-	var totalIkan, hitung int
+	beratPerWadah := make([]float64, totalWadah)
+	jumlahIkanPerWadah := make([]int, totalWadah)
 
 	for wadah := 0; wadah < totalWadah; wadah++ {
 		indexmulai := wadah * y
 		indexselesai := indexmulai + y
 		if indexselesai > n {
-			indexselesai = n 
+			indexselesai = n
 		}
 
+		var totalBerat float64
 		for i := indexmulai; i < indexselesai; i++ {
 			totalBerat += b[i]
-			hitung++
+			jumlahIkanPerWadah[wadah]++ 
 		}
+		beratPerWadah[wadah] = totalBerat
+	}
 
+	return beratPerWadah, jumlahIkanPerWadah
+}
+
+func rataRataPerWadah(beratPerWadah []float64, jumlahIkanPerWadah []int) (float64, int) {
+	var totalRata, rataseluruhnya float64
+	var totalIkan int
+
+	for wadah, totalBerat := range beratPerWadah {
+		hitung := jumlahIkanPerWadah[wadah]
 		if hitung > 0 {
-			rata := float64(totalBerat) / float64(hitung)
-			fmt.Printf("Rata-rata berat ikan di wadah %d: %.2f\n", wadah + 1, rata)
-			totalRata += rata * float64(hitung) 
-			totalIkan += hitung                  
+			fmt.Printf("Total berat ikan di wadah %d: %.2f\n", wadah+1, totalBerat)
+			rata := totalBerat / float64(hitung) 
+			fmt.Printf("Rata-rata berat ikan di wadah %d: %.2f\n", wadah+1, rata)
+			totalRata += totalBerat 
+			totalIkan += hitung
 		} else {
-			fmt.Printf("Wadah %d tidak memiliki ikan.\n", wadah)
+			fmt.Printf("Wadah %d tidak memiliki ikan.\n", wadah+1)
 		}
 	}
 
@@ -63,12 +77,15 @@ func main() {
 	fmt.Scan(&n)
 	fmt.Print("Masukkan kapasitas maksimum per wadah: ")
 	fmt.Scan(&y)
-	dataikan(&berat, n)
-	totalWadah, wadahTerakhir := banyakwadah(n, y)
 
-	fmt.Println("Total wadah yang dibutuhkan:", totalWadah)
-	fmt.Println("Jumlah ikan di wadah terakhir:", wadahTerakhir)
-	rataseluruhnya, totalIkan := rataRataPerWadah(&berat, n, y)
+	if n <= 0 || y <= 0 {
+		fmt.Println("Jumlah ikan dan kapasitas maksimum per wadah harus lebih besar dari 0.")
+		return
+	}
+
+	dataikan(&berat, n)
+	beratPerWadah, jumlahIkanPerWadah := totalBeratDanJumlahIkanPerWadah(&berat, n, y)
+	rataseluruhnya, totalIkan := rataRataPerWadah(beratPerWadah, jumlahIkanPerWadah)
 
 	if totalIkan > 0 {
 		fmt.Printf("Rata-rata keseluruhan berat ikan: %.2f\n", rataseluruhnya)
