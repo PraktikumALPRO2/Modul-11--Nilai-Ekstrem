@@ -29,10 +29,42 @@
 
 ##### 1. Sebuah program digunakan untuk mendata berat anak kelinci yang akan dijual ke pasar. Program ini menggunakan array dengan kapasitas 1000 untuk menampung data berat anak kelinci yang akan dijual. Masukan terdiri dari sekumpulan bilangan, yang mana bilangan pertama adalah bilangan bulat N yang menyatakan banyaknya anak kelinci yang akan ditimbang beratnya. Selanjutnya N bilangan riil berikutnya adalah berat dari anak kelinci yang akan dijual. Keluaran terdiri dari dua buah bilangan riil yang menyatakan berat kelinci terkecil dan terbesar.
 ```go
+package main
+
+import "fmt"
+
+func main() {
+
+	var berat [1000]float64
+
+	var n int
+	fmt.Print("Masukkan jumlah anak kelinci: ")
+	fmt.Scan(&n)
+
+	fmt.Println("Masukkan berat anak kelinci:")
+	for i := 0; i < n; i++ {
+		fmt.Scan(&berat[i])
+	}
+
+	minBerat := berat[0]
+	maxBerat := berat[0]
+
+	for i := 1; i < n; i++ {
+		if berat[i] < minBerat {
+			minBerat = berat[i]
+		}
+		if berat[i] > maxBerat {
+			maxBerat = berat[i]
+		}
+	}
+
+	fmt.Printf("Berat terkecil: %.2f\n", minBerat)
+	fmt.Printf("Berat terbesar: %.2f\n", maxBerat)
+}
 
 ```
 ##### Screenshoot Output
-
+![Screenshot 2024-11-24 220950](https://github.com/user-attachments/assets/85ee6b9a-1ac0-4e05-97ef-b4435ad3ac01)
 
 ##### Deskripsi Program
 
@@ -49,10 +81,58 @@
 
 ##### 3. Pos Pelayanan Terpadu (posyandu) sebagai tempat pelayanan kesehatan perlu mencatat data berat balita (dalam kg). Petugas akan memasukkan data tersebut ke dalam array. Dari data yang diperoleh akan dicari berat balita terkecil, terbesar, dan reratanya.
 ```go
+package main
+
+import "fmt"
+
+type arrBalita [100]float64
+
+func hitungMinMax(arrBerat arrBalita, n int, bMin, bMax *float64) {
+	*bMin = arrBerat[0]
+	*bMax = arrBerat[0]
+	for i := 1; i < n; i++ {
+		if arrBerat[i] < *bMin {
+			*bMin = arrBerat[i]
+		}
+		if arrBerat[i] > *bMax {
+			*bMax = arrBerat[i]
+		}
+	}
+}
+
+func rerata(arrBerat arrBalita, n int) float64 {
+	total := 0.0
+	for i := 0; i < n; i++ {
+		total += arrBerat[i]
+	}
+	return total / float64(n)
+}
+
+func main() {
+
+	var n int
+	var beratBalita arrBalita
+	var bMin, bMax float64
+
+	fmt.Print("Masukan banyak data berat balita : ")
+	fmt.Scan(&n)
+
+	for i := 0; i < n; i++ {
+		fmt.Printf("Masukan berat balita ke-%d: ", i+1)
+		fmt.Scan(&beratBalita[i])
+	}
+
+	hitungMinMax(beratBalita, n, &bMin, &bMax)
+	rata := rerata(beratBalita, n)
+
+	fmt.Printf("Berat balita minimum: %.2f kg\n", bMin)
+	fmt.Printf("Berat balita maksimum: %.2f kg\n", bMax)
+	fmt.Printf("Rerata berat balita: %.2f kg\n", rata)
+}
 
 ```
 ##### Screenshoot Output
-
+![Screenshot 2024-11-24 221053](https://github.com/user-attachments/assets/e24c449a-fa1d-4a68-bb08-aa547968a903)
 
 ##### Deskripsi Program
 
